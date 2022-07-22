@@ -1,0 +1,20 @@
+{
+  "name": "jabba-index",
+  "version": "1.0.0",
+  "description": "a tool to update jabbas jdk index",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Patrick McCourt",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.25.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  },
+  "dependencies": {
+    "axios": "^1.1.2"
+  }
+}
