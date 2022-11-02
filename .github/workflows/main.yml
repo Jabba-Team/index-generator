@@ -1,0 +1,28 @@
+name: Generate Jabba Index
+
+on:
+  schedule: 
+    - cron: '0 0 * * *'
+
+jobs:
+  generate-index:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: lts/hydrogen
+    - run: npm ci
+    - name: Generate Index
+      id: generate_index 
+      run: node src/index.js
+    - name: Push Index file
+      uses: dmnemec/copy_file_to_another_repo_action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      with:
+        source_file: 'index.json'
+        destination_repo: 'Jabba-Team/jabba'
+        user_email: 'hello@pmcc.dev'
+        user_name: 'patrick-mccourt'
+        commit_message: 'daily update for the index file'

@@ -1,6 +1,5 @@
 import axios from 'axios';
-import fs from 'fs';
-
+import { writeFile } from 'node:fs';
 
 const windowsOpts = {
   operatingSystem: 'windows',
@@ -64,7 +63,6 @@ function mapArchitecture(architecture) {
 }
 
 function mapArchiveType(archiveType) {
-  console.log(archiveType);
   if(archiveType === 'tar.gz') {
     return 'tgz+';
   } else if (archiveType === 'zip') {
@@ -117,23 +115,13 @@ parsePackages(await fetchPackages(windowsOpts), windowsOpts.archiveType);
 parsePackages(await fetchPackages(macOpts), macOpts.archiveType);
 parsePackages(await fetchPackages(linuxOpts), linuxOpts.archiveType);
 
-const filename = 'index.json';
 
-fs.open(filename, 'a', (err, fd) => {
-  if (err) {
-    console.log(err.message);
-  } else {
-    fs.write(fd, JSON.stringify(index), (err2, bytes) => {
-      if (err2) {
-        console.log(err2.message);
-      } else {
-        console.log(`${bytes} bytes written`);
-      }
-    });
-  }
+writeFile('index.json', JSON.stringify(index, null, 4), (err) => {
+  if (err) throw err;
+  console.log('The file has been saved!');
 });
 
-// build up an object that looks like thisx
+// build up an object that looks like this
 /*
 {
     "windows": {
