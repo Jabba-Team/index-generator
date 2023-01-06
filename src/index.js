@@ -52,12 +52,15 @@ function mapOS(os) {
   return os;
 }
 
-function mapArchitecture(architecture) {
+function mapArchitecture(os, architecture) {
   if(architecture === 'x64') {
     return 'amd64';
   }
   if(architecture === 'x86') {
     return '386'
+  }
+  if(os === 'macos' && architecture === 'aarch64') {
+    return 'arm64'
   }
   return architecture;
 }
@@ -91,7 +94,7 @@ function parsePackages(packageList, archiveType) {
   packageList.forEach((jdkPkg) => {
 
     const operatingSystem = mapOS(jdkPkg.operating_system);
-    const architecture = mapArchitecture(jdkPkg.architecture);
+    const architecture = mapArchitecture(jdkPkg.operating_system, jdkPkg.architecture);
     const link = jdkPkg.links.pkg_download_redirect;
     if (!index[operatingSystem]) {
       index[operatingSystem] = {};
