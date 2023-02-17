@@ -2,8 +2,6 @@ name: Generate Jabba Index
 
 on:
   workflow_dispatch:
-  schedule: 
-    - cron: '0 0 * * *'
 
 jobs:
   generate-index:
