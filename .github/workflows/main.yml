@@ -2,6 +2,8 @@ name: Generate Jabba Index
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
   generate-index:
@@ -21,7 +23,7 @@ jobs:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
         source_file: 'index.json'
-        destination_repo: 'Jabba-Team/jabba'
+        destination_repo: 'Jabba-Team/index'
         user_email: 'hello@pmcc.dev'
         user_name: 'patrick-mccourt'
         commit_message: 'daily update for the index file'
