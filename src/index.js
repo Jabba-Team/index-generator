@@ -20,6 +20,7 @@ const linuxOpts = {
   operatingSystem: 'linux',
   archiveTypes: ['zip', 'tar.gz'],
   architectures: ['amd64', 'x86', 'arm', 'arm64'],
+  lib_c_type: 'glibc',
 };
 
 const index = {
@@ -30,6 +31,7 @@ const index = {
 
 async function fetchPackages(pkgOptions) {
   let architecture = '';
+  let extraOps = '';
   pkgOptions.architectures.forEach((arch) => {
     architecture += `&architecture=${arch}`;
   });
@@ -37,7 +39,10 @@ async function fetchPackages(pkgOptions) {
   pkgOptions.archiveTypes.forEach((type) => {
     archiveType += `&archive_type=${type}`;
   });
-  const url = `https://api.foojay.io/disco/v3.0/packages/jdks?operating_system=${pkgOptions.operatingSystem}${architecture}&javafx_bundled=false${archiveType}`;
+  if (pkgOptions.lib_c_type) {
+    extraOps = `&lib_c_type=${pkgOptions.lib_c_type}`;
+  }
+  const url = `https://api.foojay.io/disco/v3.0/packages/jdks?operating_system=${pkgOptions.operatingSystem}${architecture}&javafx_bundled=false${archiveType}${extraOps}`;
   return axios({
     url,
     method: 'get',
