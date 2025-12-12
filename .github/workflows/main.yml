@@ -13,7 +13,12 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: 22.5.1
-    - run: npm ci
+    - uses: pnpm/action-setup@v4
+      with:
+        version: 9
+    - run: pnpm install --frozen-lockfile
+    - name: Run Tests
+      run: pnpm test
     - name: Generate Index
       id: generate_index 
       run: node src/index.js
