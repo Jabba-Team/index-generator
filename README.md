@@ -14,6 +14,7 @@ This repository contains a tool for automatically updating the JDK index used by
 ## Prerequisites
 
 - **Node.js LTS or Current**: Any supported Node version should work
+- **pnpm**: Package manager (install with `npm install -g pnpm` or see [pnpm installation guide](https://pnpm.io/installation))
 
 ## Setup
 
@@ -36,10 +37,15 @@ This repository contains a tool for automatically updating the JDK index used by
 
 3. **Install Dependencies**:
    ```bash
-   npm install
+   pnpm install
    ```
 
-4. **Run the Generator**:
+4. **Run Tests** (optional):
+   ```bash
+   pnpm test
+   ```
+
+5. **Run the Generator**:
    ```bash
    node src/index.js
    ```
