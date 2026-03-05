@@ -22,6 +22,10 @@ jobs:
     - name: Generate Index
       id: generate_index 
       run: node src/index.js
+    - name: Fetch Current Index
+      run: curl -o old-index.json https://raw.githubusercontent.com/Jabba-Team/index/main/index.json
+    - name: Validate Index
+      run: node src/validate.js
     - name: Push Index file
       uses: dmnemec/copy_file_to_another_repo_action@main
       env:
