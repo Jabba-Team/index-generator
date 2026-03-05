@@ -1,7 +1,3 @@
-Here's an updated README with an alternative SSH clone option:
-
----
-
 # Jabba Index Generator
 
 This repository contains a tool for automatically updating the JDK index used by [Jabba](https://github.com/shyiko/jabba), a popular Java version manager. The tool leverages the [DiscoAPI](https://api.foojay.io/disco/v2.0/) to fetch the latest JDK distributions and updates the index accordingly.
